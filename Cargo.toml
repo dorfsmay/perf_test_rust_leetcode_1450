@@ -1,0 +1,6 @@
+[package]
+name = "perf_test_rust_leetcode_1450"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
