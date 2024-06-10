@@ -2,6 +2,7 @@ use std::cmp::{Ord, Ordering};
 use std::env;
 use std::fmt;
 use std::time::{Duration, Instant};
+use std::hint::black_box;
 
 pub fn busy_student1(start_time: &[u32], end_time: &[u32], query_time: u32) -> u32 {
     start_time
@@ -85,8 +86,8 @@ fn run<'a>(
     runme: &'a dyn Fn(&[u32], &[u32], u32) -> u32,
 ) -> Timing<'a> {
     let now = Instant::now();
-    for _n in 0..loops {
-        let _ = runme(start, stop, query);
+    for _ in 0..loops {
+        let _ = black_box(runme(black_box(start), black_box(stop), black_box(query)));
     }
     Timing {
         description: msg,
@@ -137,12 +138,13 @@ fn main() {
 
             // tests
             let mut res = vec![] as Vec<Timing>;
-            res.push(run(loops, label1, &s1, &e1, q1, &busy_student1));
-            res.push(run(loops, label2, &s1, &e1, q1, &busy_student2));
-            res.push(run(loops, label3, &s1, &e1, q1, &busy_student3));
+            res.push(black_box(run(black_box(loops), black_box(label1), black_box(&s1), black_box(&e1), black_box(q1), &busy_student1)));
+            res.push(black_box(run(black_box(loops), black_box(label2), black_box(&s1), black_box(&e1), black_box(q1), &busy_student2)));
+            res.push(black_box(run(black_box(loops), black_box(label3), black_box(&s1), black_box(&e1), black_box(q1), &busy_student3)));
             res.sort();
             println!("{:?}", &res);
 
+            /*
             let mut res = vec![] as Vec<Timing>;
             res.push(run(loops, label1, &s1, &e1, q1, &busy_student1));
             res.push(run(loops, label3, &s1, &e1, q1, &busy_student3));
@@ -177,6 +179,7 @@ fn main() {
             res.push(run(loops, label1, &s1, &e1, q1, &busy_student1));
             res.sort();
             println!("{:?}", &res);
+            */
         } else {
             println!("\"{}\" is not an option.", args[1]);
         }
