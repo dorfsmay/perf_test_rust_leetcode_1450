@@ -31,6 +31,17 @@ pub fn busy_student3(start_time: &[u32], end_time: &[u32], query_time: u32) -> u
     count
 }
 
+pub fn busy_student4(start_time: &[u32], end_time: &[u32], query_time: u32) -> u32 {
+    let mut count = 0;
+    let zipped = start_time.iter().zip(end_time);
+    for end_start in zipped {
+        if *end_start.0 <= query_time && *end_start.1 >= query_time {
+            count += 1;
+        }
+    };
+    count
+}
+
 #[derive(Eq)]
 struct Timing<'a> {
     description: &'a str,
@@ -116,7 +127,7 @@ fn main() {
             let s = [1, 1, 1, 2,  2, 5, 5, 5, 6, 7, 12];
             let e = [2, 7, 6, 99, 4, 5, 6, 7, 6, 7, 28];
             let q = 6;
-            println!("{:?} {:?} {} => {} (should be 6)", s, e, q, busy_student3(&s, &e, q));
+            println!("{:?} {:?} {} => {} (should be 6)", s, e, q, busy_student4(&s, &e, q));
 
             /*
              *
@@ -130,6 +141,7 @@ fn main() {
             let label1 = "test 1 - single itier, no copied";
             let label2 = "test 2 - using iters and copies from Demon";
             let label3 = "test 3 - using a dumb iteration and square indexes";
+            let label4 = "test 4 - dumb iteration over the zipped values";
 
             // warmup
             let _ = busy_student1(s1, e1, q1);
@@ -141,6 +153,7 @@ fn main() {
             res.push(black_box(run(black_box(loops), black_box(label1), black_box(&s1), black_box(&e1), black_box(q1), &busy_student1)));
             res.push(black_box(run(black_box(loops), black_box(label2), black_box(&s1), black_box(&e1), black_box(q1), &busy_student2)));
             res.push(black_box(run(black_box(loops), black_box(label3), black_box(&s1), black_box(&e1), black_box(q1), &busy_student3)));
+            res.push(black_box(run(black_box(loops), black_box(label4), black_box(&s1), black_box(&e1), black_box(q1), &busy_student4)));
             res.sort();
             println!("{:?}", &res);
 
