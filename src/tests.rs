@@ -1,7 +1,7 @@
 #[cfg(test)]
 use super::*;
 
-pub fn slots(set: &str) -> (Vec<u32>, Vec<u32>, u32, u32) {
+pub fn slots(set: &str) -> (Vec<i32>, Vec<i32>, i32, i32) {
     match set {
         // 3rd => 1
         "three" => (vec![1, 2, 3], vec![3, 2, 7], 4, 1),
@@ -20,64 +20,64 @@ pub fn slots(set: &str) -> (Vec<u32>, Vec<u32>, u32, u32) {
 #[test]
 fn single_slots_busy_student_1() {
     let (s, e, q, res) = slots("single");
-    assert_eq!(busy_student_1(&s, &e, q), res);
+    assert_eq!(busy_student_1(s, e, q), res);
 }
 #[test]
 fn single_slots_busy_student_2() {
     let (s, e, q, res) =slots("single");
-    assert_eq!(busy_student_2(&s, &e, q), res);
+    assert_eq!(busy_student_2(s, e, q), res);
 }
 #[test]
 fn single_slots_busy_student_3() {
     let (s, e, q, res) =slots("single");
-    assert_eq!(busy_student_3(&s, &e, q), res);
+    assert_eq!(busy_student_3(s, e, q), res);
 }
 #[test]
 fn single_slots_busy_student_4() {
     let (s, e, q, res) =slots("single");
-    assert_eq!(busy_student_4(&s, &e, q), res);
+    assert_eq!(busy_student_4(s, e, q), res);
 }
 
 // three
 #[test]
 fn three_slot_busy_student_1() {
     let (s, e, q, res) =slots("three");
-    assert_eq!(busy_student_1(&s, &e, q), res);
+    assert_eq!(busy_student_1(s, e, q), res);
 }
 #[test]
 fn three_slot_busy_student_2() {
     let (s, e, q, res) =slots("three");
-    assert_eq!(busy_student_2(&s, &e, q), res);
+    assert_eq!(busy_student_2(s, e, q), res);
 }
 #[test]
 fn three_slot_busy_student_3() {
     let (s, e, q, res) =slots("three");
-    assert_eq!(busy_student_3(&s, &e, q), res);
+    assert_eq!(busy_student_3(s, e, q), res);
 }
 #[test]
 fn three_slot_busy_student_4() {
     let (s, e, q, res) =slots("three");
-    assert_eq!(busy_student_4(&s, &e, q), res);
+    assert_eq!(busy_student_4(s, e, q), res);
 }
 
 // eleven
 #[test]
 fn eleven_slot_busy_student_1() {
     let (s, e, q, res) =slots("eleven");
-    assert_eq!(busy_student_1(&s, &e, q), res);
+    assert_eq!(busy_student_1(s, e, q), res);
 }
 #[test]
 fn eleven_slot_busy_student_2() {
     let (s, e, q, res) =slots("eleven");
-    assert_eq!(busy_student_2(&s, &e, q), res);
+    assert_eq!(busy_student_2(s, e, q), res);
 }
 #[test]
 fn eleven_slot_busy_student_3() {
     let (s, e, q, res) =slots("eleven");
-    assert_eq!(busy_student_3(&s, &e, q), res);
+    assert_eq!(busy_student_3(s, e, q), res);
 }
 #[test]
 fn eleven_slot_busy_student_4() {
     let (s, e, q, res) =slots("eleven");
-    assert_eq!(busy_student_4(&s, &e, q), res);
+    assert_eq!(busy_student_4(s, e, q), res);
 }
